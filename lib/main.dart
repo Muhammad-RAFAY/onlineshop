@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:online_shop/ProductList.dart';
 import 'package:online_shop/customer_list_widget.dart';
 
 import 'models/product.dart';
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: "Product"),
+      home: ProductsList(),
     );
   }
 }
@@ -38,9 +39,9 @@ class _MyHomePageState extends State<MyHomePage> {
   TextEditingController productPriceController = TextEditingController();
 
   List<Product> productList = [
-    Product(title: "Mobile", description: "", price: 1000),
-    Product(title: "Laptop", description: "", price: 400),
-    Product(title: "Car", description: "", price: 1000),
+    Product(title: "Mobile", description: "", price: 1000, productUrl: ""),
+    Product(title: "Laptop", description: "", price: 400, productUrl: ""),
+    Product(title: "Car", description: "", price: 1000, productUrl: ""),
   ];
 
   void showModelBottomSheetFloatingActionButton() {
@@ -75,10 +76,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
                 setState(() {
                   productList.add(Product(
-                    title: title,
-                    price: price,
-                    description: descripton,
-                  ));
+                      title: title,
+                      price: price,
+                      description: descripton,
+                      productUrl: ""));
                 });
                 productNameController.clear();
                 productPriceController.clear();
