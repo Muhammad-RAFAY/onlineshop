@@ -26,34 +26,37 @@ class ProductsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(),
         body: GridView(
-      padding: EdgeInsets.all(20),
-      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 300, crossAxisSpacing: 10, mainAxisSpacing: 10),
-      children: productsList
-          .map(
-            (product) => Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Image(
-                    width: 150,
-                    height: 150,
-                    image: AssetImage(product.productUrl),
+          padding: EdgeInsets.all(20),
+          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 300,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10),
+          children: productsList
+              .map(
+                (product) => Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Image(
+                        width: 150,
+                        height: 150,
+                        image: AssetImage(product.productUrl),
+                      ),
+                      Text(
+                        "\$${product.price}",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 34,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Text("${product.description}")
+                    ],
                   ),
-                  Text(
-                    "\$${product.price}",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 34,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Text("${product.description}")
-                ],
-              ),
-            ),
-          )
-          .toList(),
-    ));
+                ),
+              )
+              .toList(),
+        ));
   }
 }
