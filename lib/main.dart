@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:online_shop/customer_list_widget.dart';
 import 'package:online_shop/screens/ProductScreen.dart';
-import 'package:online_shop/screens/SwitchDemo.dart';
+import 'package:online_shop/splash_screen.dart';
 
 import 'ProductList.dart';
 
-void main() {
+void main() async {
   runApp(MyApp());
+}
+
+Future<Widget> getData() {
+  return Future.delayed(
+    Duration(seconds: 5),
+    () => Text("getData called"),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -20,7 +27,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: SwitchDemo());
+        home: SplashScreen());
   }
 }
 
@@ -33,6 +40,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   String title = "Shop App";
 
   int index = 0;

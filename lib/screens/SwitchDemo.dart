@@ -9,8 +9,11 @@ class SwitchDemo extends StatefulWidget {
 
 class _SwitchDemoState extends State<SwitchDemo> {
   bool isSelected = false;
+  bool isSelected1 = false;
   String groupValue = "";
   String groupValueForAnotherRadio = "";
+  bool isChecked = false;
+  bool isChecked1 = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,15 +25,21 @@ class _SwitchDemoState extends State<SwitchDemo> {
               onChanged: (value) {
                 setState(() {
                   isSelected = value;
+                  if (isSelected1) {
+                    isSelected1 = false;
+                  }
                 });
                 print(value);
               }),
           SwitchListTile(
               title: Text("shoes"),
-              value: isSelected,
+              value: isSelected1,
               onChanged: (value) {
                 setState(() {
-                  isSelected = value;
+                  isSelected1 = value;
+                  if (isSelected) {
+                    isSelected = false;
+                  }
                 });
                 print(value);
               }),
@@ -54,6 +63,24 @@ class _SwitchDemoState extends State<SwitchDemo> {
                   groupValue = value!;
                 });
                 print(value!);
+              }),
+          CheckboxListTile(
+              title: Text("Email Services"),
+              value: isChecked,
+              onChanged: (value) {
+                setState(() {
+                  isChecked = value!;
+                });
+                print(value);
+              }),
+          CheckboxListTile(
+              title: Text("Email Services"),
+              value: isChecked1,
+              onChanged: (value) {
+                setState(() {
+                  isChecked1 = value!;
+                });
+                print(value);
               })
         ],
       ),
