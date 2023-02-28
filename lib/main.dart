@@ -1,12 +1,20 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:online_shop/customer_list_widget.dart';
+import 'package:online_shop/posts.dart';
 import 'package:online_shop/screens/ProductScreen.dart';
-import 'package:online_shop/splash_screen.dart';
 
 import 'ProductList.dart';
 
-void main() async {
-  runApp(MyApp());
+void main() {
+  // runApp(MyApp());
+  String personData =
+      '[[{"name":"ali","age":24,"hobbies":[]},{"name":"Noshad","age":21,"hobbies":["Writing"]}]]';
+  List myJsonData = jsonDecode(personData);
+  print(myJsonData[0][1]["name"]);
+  print(myJsonData[0][1]["age"]);
+  print(myJsonData[0][1]["hobbies"]);
 }
 
 Future<Widget> getData() {
@@ -27,7 +35,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: SplashScreen());
+        home: PostsWidgets());
   }
 }
 
@@ -42,7 +50,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
