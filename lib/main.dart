@@ -1,20 +1,62 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:online_shop/customer_list_widget.dart';
-import 'package:online_shop/posts.dart';
 import 'package:online_shop/screens/ProductScreen.dart';
 
 import 'ProductList.dart';
 
 void main() {
-  // runApp(MyApp());
-  String personData =
-      '[[{"name":"ali","age":24,"hobbies":[]},{"name":"Noshad","age":21,"hobbies":["Writing"]}]]';
-  List myJsonData = jsonDecode(personData);
-  print(myJsonData[0][1]["name"]);
-  print(myJsonData[0][1]["age"]);
-  print(myJsonData[0][1]["hobbies"]);
+  // http.Response response = await http.get(
+  //   Uri.parse(
+  //     "https://jsonplaceholder.typicode.com/posts",
+  //   ),
+  // );
+  // if (response.statusCode == 200) {
+  //   List myJsonData = jsonDecode(response.body);
+  //   for (int i = 0; i < myJsonData.length; i++) {
+  //     print(
+  //         "${myJsonData[i]["id"]} ${myJsonData[i]["title"]} ${myJsonData[i]["body"]}");
+  //     print("***************************");
+  //   }
+  // }
+  runApp(MyApp());
+}
+
+class MyJsonDataWidget extends StatefulWidget {
+  @override
+  State<MyJsonDataWidget> createState() => _MyJsonDataWidgetState();
+}
+
+class _MyJsonDataWidgetState extends State<MyJsonDataWidget> {
+  List users = [];
+
+  void getData() async {
+    http.Response response =
+        await http.get(Uri.parse("https://jsonplaceholder.typicode.com/users"));
+    if (response.statusCode == 200) {
+      setState(() {
+        users = jsonDecode(response.body);
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    getData();
+    return Scaffold(
+      body: ListView.builder(
+          itemCount: users.length,
+          itemBuilder: (_, index) {
+            return ListTile(
+              leading: Text("${users[index]["id"]}"),
+              title: Text("${users[index]["username"]}"),
+              subtitle: Text("${users[index]["email"]}"),
+            );
+          }),
+    );
+  }
 }
 
 Future<Widget> getData() {
@@ -35,7 +77,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: PostsWidgets());
+        home: MyJsonDataWidget());
   }
 }
 
